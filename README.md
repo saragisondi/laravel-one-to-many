@@ -369,7 +369,9 @@ I task da svolgere sono diversi, ma alcuni di essi sono un ripasso di ciò che a
 creare il seeder per il model Type e il seeder della tabella ‘projects’ con l’id del type (random) in relazione <br>
 **Bonus 2:**
 aggiungere le operazioni CRUD per il model Type, in modo da gestire le tipologie di progetto direttamente dal pannello di amministrazione.
+
 ### **Steps:**
+<br>
 **Migration**
 - Faccio la migration della tabella *type*
 - Lancio la migration
@@ -393,6 +395,7 @@ aggiungere le operazioni CRUD per il model Type, in modo da gestire le tipologie
 - Nella function *down*:
   - Elimino la *Foreign key*: `$table->dropForeign(['type_id']);`
   - Elimino la colonna: `$table->dropColumn('type_id');`
+  <br>
 **One to Many**
 - Nel *Model\Project* faccio una funzione per mettere *Project* in relazione la tabella *Type*:<br>
  `public function type(){`<br>
@@ -402,3 +405,9 @@ aggiungere le operazioni CRUD per il model Type, in modo da gestire le tipologie
 `public function projects(){`<br>
     `return $this->hasMany(Projects::class);`<br>
     `}`
+
+
+**Relazione Random**
+- Genero un numero Random dalla tabella Type:
+  ` $new_project-> type_id = Type::inRandomOrder()->first()->id();`
+- Faccio un migrate:refresh
