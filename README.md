@@ -411,3 +411,5 @@ aggiungere le operazioni CRUD per il model Type, in modo da gestire le tipologie
 - Genero un numero Random dalla tabella Type:
   ` $new_project-> type_id = Type::inRandomOrder()->first()->id;`
 - Faccio un migrate:refresh
+
+

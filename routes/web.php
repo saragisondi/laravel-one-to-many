@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DashbordController;
 use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\Admin\TypeController;
 use App\Http\Controllers\Guest\PageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,8 @@ Route::middleware(['auth', 'verified'])
         Route::get('/', [DashbordController::class, 'index'])->name('home');
         Route::resource('projects', ProjectController::class);
         Route::get('orderBy/{direction}', [ProjectController::class, 'orderBy'])->name('orderBy');
+        Route::resource('types', TypeController::class);
+
     });
 
 
