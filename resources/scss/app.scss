@@ -1,0 +1,43 @@
+@import '~bootstrap/scss/bootstrap';
+
+.main-wrapper{
+  height: 100vh;
+
+  main{
+      height: 100%;
+
+      aside{
+          width: 250px;
+          min-height: calc(100% - 53px);
+
+          li{
+              list-style: none;
+              margin: 15px 0;
+
+              a{
+                text-decoration: none;
+                color: white;
+
+                &:hover{
+                  text-decoration: underline;
+                }
+
+                i{
+                  font-size:20px;
+                  margin: 0 10px;
+                }
+              }
+          }
+      }
+
+      .ck-editor__editable_inline{
+        min-height: 500px;
+      }
+
+  }
+
+}
+
+
+
+
