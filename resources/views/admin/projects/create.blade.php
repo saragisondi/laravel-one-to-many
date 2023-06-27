@@ -36,6 +36,17 @@
       @enderror
     </div>
 
+
+
+    <label for="title" class="form-label fw-bold" >Tipologie</label>
+    <select class="mb-4 form-select" aria-label="Default select example">
+      <option selected>Selezionare una tipologia</option>
+        @foreach ($typologies as $type)
+          <option value="1{{$type->id}}">{{$type->name}}</option>
+        @endforeach
+
+    </select>
+
     <div class="mb-3">
       <label for="text" class="form-label fw-bold">Testo</label>
       <textarea
