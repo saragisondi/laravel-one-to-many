@@ -21,14 +21,18 @@
       <tr>
         <th scope="col"><a href="{{route('admin.orderBy',['direction' => $direction ] )}}" class="text-black">Id</a></th>
         <th scope="col">Titolo</th>
+        <th scope="col">Tipo</th>
         <th scope="col">Data</th>
+        <th scope="col">Azioni</th>
       </tr>
     </thead>
     <tbody>
       @foreach ($projects as $project)
         <tr>
-          <td>{{$project ->id}}</td>
-          <td>{{$project ->title}}</td>
+          <td>{{$project->id}}</td>
+          <td>{{$project->title}}</td>
+          <td><span class="badge text-bg-primary">{{$project->type->name}}</span></td>
+
           @php
             $date = date_create($project->date);
           @endphp
