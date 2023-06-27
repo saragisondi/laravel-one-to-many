@@ -370,3 +370,35 @@ creare il seeder per il model Type e il seeder della tabella ‘projects’ con 
 **Bonus 2:**
 aggiungere le operazioni CRUD per il model Type, in modo da gestire le tipologie di progetto direttamente dal pannello di amministrazione.
 ### **Steps:**
+**Migration**
+- Faccio la migration della tabella *type*
+- Lancio la migration
+**Seeder**
+- Creo il seeder:
+  - Creo un array
+  - Ciclo gli elementi
+<br>
+- Lancio il seeder
+- Creo una migration update:
+`php artisan make:migration update_projects_table --table=projects`
+**Foreign Key: type**
+- Nella function *up*:
+  - Creo la colonna della *Foreign Key*: `$table->unsignedBigInteger('type_id')->nullable()->after('id')`
+  - Assegno la *Foreign Key* alla colonna creata: <br>
+  `$table->foreign('type_id')` <br>
+         `->references('id')` <br>
+          `->on('types')` <br>
+          `->onDelete('set null');` <br>
+          
+- Nella function *down*:
+  - Elimino la *Foreign key*: `$table->dropForeign(['type_id']);`
+  - Elimino la colonna: `$table->dropColumn('type_id');`
+**One to Many**
+- Nel *Model\Project* faccio una funzione per mettere *Project* in relazione la tabella *Type*:<br>
+ `public function type(){`<br>
+    `return $this->belongsTo(Type::class);`<br>
+    `}`
+- Nel *Model\Type* faccio una funzione per mettere *Type* in relazione la tabella *Project*:<br>
+`public function projects(){`<br>
+    `return $this->hasMany(Projects::class);`<br>
+    `}`
