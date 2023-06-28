@@ -372,7 +372,8 @@ aggiungere le operazioni CRUD per il model Type, in modo da gestire le tipologie
 
 ### **Steps:**
 <br>
-**Migration**
+
+**creare la migration per la tabella `types` e creare il model `Type`**
 - Faccio la migration della tabella *type*
 - Lancio la migration
 **Seeder**
@@ -381,6 +382,8 @@ aggiungere le operazioni CRUD per il model Type, in modo da gestire le tipologie
   - Ciclo gli elementi
 <br>
 - Lancio il seeder
+
+**creare la migration di modifica per la tabella `projects` per aggiungere la chiave esterna**
 - Creo una migration update:
 `php artisan make:migration update_projects_table --table=projects`
 **Foreign Key: type**
@@ -396,7 +399,8 @@ aggiungere le operazioni CRUD per il model Type, in modo da gestire le tipologie
   - Elimino la *Foreign key*: `$table->dropForeign(['type_id']);`
   - Elimino la colonna: `$table->dropColumn('type_id');`
   <br>
-**One to Many**
+  
+**aggiungere ai model Type e Project i metodi per definire la relazione one to many**
 - Nel *Model\Project* faccio una funzione per mettere *Project* in relazione la tabella *Type*:<br>
  `public function type(){`<br>
     `return $this->belongsTo(Type::class);`<br>
@@ -406,10 +410,20 @@ aggiungere le operazioni CRUD per il model Type, in modo da gestire le tipologie
     `return $this->hasMany(Projects::class);`<br>
     `}`
 
-
-**Relazione Random**
+**visualizzare nella pagina di dettaglio di un progetto la tipologia associata, se presente**
+*Relazione Random*
 - Genero un numero Random dalla tabella Type:
   ` $new_project-> type_id = Type::inRandomOrder()->first()->id;`
 - Faccio un migrate:refresh
+- Nel *ProjectController* dentro la funzione *create* faccio una query per le tipologie e le inserisco nel compact
+- Nella view *index.blade.php* faccio un ciclo per vederli in pagina
 
+**permettere all’utente di associare una tipologia nella pagina di creazione e modifica di un progetto**
+- Nel *create.blade.php* e in *edit.blade.php faccio una select dove ciclo le tipologie, nel *option value* inserisco l' *id* e stampo il *name*
+- Nel *fillable* all'interno di *Project* inserisco il dato da aggiungere: *type_id* 
+- Nel *ProjectController* dentro la funzione *edit* faccio una query per le tipologie e le inserisco nel compact
 
+<br>
+
+**gestire il salvataggio dell’associazione progetto-tipologia con opportune regole di validazione**
+- 
