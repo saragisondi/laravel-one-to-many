@@ -18,12 +18,15 @@
 
   <div class="w-50">
 
-    <div class="mb-3 input-group">
-      <input type="text" class="form-control" placeholder="Nuova Tipologia" aria-label="Nuova Tipologia" aria-describedby="basic-addon2">
-      <div class="input-group-append">
-        <button class="mx-3 btn btn-outline-primary" type="button"> <i class="fa-solid fa-plus"></i> Add </button>
+    <form action="{{route('admin.types.store')}}" method="POST">
+      <div class="mb-3 input-group">
+        @csrf
+        <input type="text" class="form-control" name="name" placeholder="Nuova Tipologia" aria-label="Nuova Tipologia" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+          <button class="mx-3 btn btn-outline-primary" type="submit"> <i class="fa-solid fa-plus"></i> Add </button>
+        </div>
       </div>
-    </div>
+    </form>
 
     <table class="table table-hover">
       <thead>

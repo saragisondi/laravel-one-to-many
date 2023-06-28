@@ -38,7 +38,18 @@ class TypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $val_data = $request->validate(
+        [
+          'name' => 'required|unique:types|max:50'
+        ]
+        );
+        $val_data['slug'] = Str::slug($val_data['name']);
+
+        $new_typologies = new Type();
+        $new_typologies->fill($val_data);
+        $new_typologies-> save();
+
+        return redirect()->back()->with('message', " $new_typologies->name è stato creato correttamente");
     }
 
     /**
