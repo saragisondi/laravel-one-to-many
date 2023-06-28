@@ -32,7 +32,7 @@
           <td>
             <ul>
               @forelse ($type->projects as $project)
-                <li><a href="#">{{$project->title}}</a></li>
+                <li><a href="{{route('admin.projects.show', $project)}}">{{$project->title}}</a></li>
               @empty
                 <li>non sono presenti progetti</li>
               @endforelse

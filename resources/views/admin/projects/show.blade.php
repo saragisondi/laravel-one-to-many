@@ -57,13 +57,16 @@
 </div>
 
   <p>{{$date_formatted}}</p>
-  <p>{{$project->type?->name}}</p>
+  <p class="badge text-bg-primary">{{$project->type?->name}}</p>
   <p>{!!$project->text!!}</p>
   <div>
     <img class="w-50" src="{{asset('storage/' . $project->image_path)}}" onerror="this.src='https://t3.ftcdn.net/jpg/02/48/42/64/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg'">
   </div>
 
-  <a href="{{route('admin.projects.index')}}" class="my-4 btn btn-secondary"><i class="fa-solid fa-rotate-left"></i></a>
+  <a href="{{route('admin.projects.index')}}" class="my-4 btn btn-secondary"><i class="fa-solid fa-arrow-rotate-left"></i> Elenco Progetti</a>
+
+  <a href="{{route('admin.typeProject')}}" class="mx-4 my-4 btn btn-dark"><i class="fa-solid fa-arrow-rotate-left"></i> Elenco Tipologie/Progetti</a>
+
 
 </div>
 
