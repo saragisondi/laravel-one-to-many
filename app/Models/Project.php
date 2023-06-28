@@ -8,32 +8,37 @@ use Illuminate\Support\Str;
 
 class Project extends Model
 {
-    use HasFactory;
+  use HasFactory;
 
-    protected $fillable = [
-      'title',
-      'slug',
-      'text',
-      'date',
-      'reading_time',
-      'image_path',
-      'image_original_name'
-    ];
+  protected $fillable = [
+    'title',
+    'type_id',
+    'slug',
+    'text',
+    'date',
+    'reading_time',
+    'image_path',
+    'image_original_name'
+  ];
 
-    public function type(){
-      return $this->belongsTo(Type::class);
-    }
+  //TYPE
+  public function type()
+  {
+    return $this->belongsTo(Type::class);
+  }
 
-    public static function generateSlug($str){
-      $slug = Str::slug($str, '-');
-      $original_slug = $slug;
+  // SLUG
+  public static function generateSlug($str)
+  {
+    $slug = Str::slug($str, '-');
+    $original_slug = $slug;
+    $slug_exists = Project::where('slug', $slug)->first();
+    $c = 1;
+    while ($slug_exists) {
+      $slug = $original_slug . '-' . $c;
       $slug_exists = Project::where('slug', $slug)->first();
-      $c = 1;
-      while($slug_exists){
-          $slug = $original_slug . '-' . $c;
-          $slug_exists = Project::where('slug', $slug)->first();
-          $c++;
-      }
-      return $slug;
+      $c++;
     }
+    return $slug;
+  }
 }

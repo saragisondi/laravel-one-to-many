@@ -57,9 +57,10 @@
 </div>
 
   <p>{{$date_formatted}}</p>
+  <p>{{$project->type?->name}}</p>
   <p>{!!$project->text!!}</p>
   <div>
-    <img class="w-50" src="{{asset('storage/' . $project->image_path)}}" alt="{{$project->title}}">
+    <img class="w-50" src="{{asset('storage/' . $project->image_path)}}" onerror="this.src='https://t3.ftcdn.net/jpg/02/48/42/64/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg'">
   </div>
 
   <a href="{{route('admin.projects.index')}}" class="my-4 btn btn-secondary"><i class="fa-solid fa-rotate-left"></i></a>

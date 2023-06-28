@@ -39,12 +39,13 @@
 
 
     <label for="title" class="form-label fw-bold" >Tipologie</label>
-    <select class="mb-4 form-select" aria-label="Default select example">
-      <option selected>Selezionare una tipologia</option>
+    <select class="mb-4 form-select" name="type_id">
+      <option value="" selected>Selezionare una tipologia</option>
         @foreach ($typologies as $type)
-          <option value="1{{$type->id}}">{{$type->name}}</option>
+          <option value="{{$type->id}}"
+            @if($type->id === old('type_id')) selected @endif
+            >{{$type->name}}</option>
         @endforeach
-
     </select>
 
     <div class="mb-3">

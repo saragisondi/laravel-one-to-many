@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Project;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProjectRequest;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Project;
 use App\Models\Type;
 
 class ProjectController extends Controller
@@ -52,10 +52,11 @@ class ProjectController extends Controller
          // dd($request->all());
         $form_data = $request->all();
 
-        // dd($form_data);
+        //dd($form_data);
 
         $form_data['slug'] = Project::generateSlug($form_data['title']);
         $form_data['date'] = date('Y-m-d');
+
 
         if(array_key_exists('image',$form_data)){
 
@@ -63,7 +64,7 @@ class ProjectController extends Controller
 
           $form_data['image_path'] = Storage::put('uploads', $form_data['image']);
 
-          // dd($form_data);
+          //dd($form_data);
 
 
         }
@@ -71,6 +72,8 @@ class ProjectController extends Controller
         $new_project = new Project();
         $new_project ->fill($form_data);
         $new_project->save();
+
+        //dump($new_project);
 
         return redirect()->route('admin.projects.show', $new_project);
     }
@@ -97,7 +100,8 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-      return view('admin.projects.edit', compact('project'));
+        $typologies= Type::all();
+      return view('admin.projects.edit', compact('project', 'typologies'));
     }
 
     /**
@@ -124,9 +128,9 @@ class ProjectController extends Controller
           Storage::disk('public')->delete($project->image_path);
         }
 
-        $form_data['image_original_name'] = $request->file('image')->getClientOriginalName();
+        // $form_data['image_original_name'] = $request->file('image')->getClientOriginalName();
 
-        $form_data['image_path'] = Storage::put('uploads', $form_data['image']);
+        // $form_data['image_path'] = Storage::put('uploads', $form_data['image']);
 
       }
 
