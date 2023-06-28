@@ -29,7 +29,7 @@ Route::middleware(['auth', 'verified'])
         Route::resource('projects', ProjectController::class);
         Route::get('orderBy/{direction}', [ProjectController::class, 'orderBy'])->name('orderBy');
         Route::resource('types', TypeController::class);
-
+        Route::get('typeProject',[ProjectController::class, 'typeProject'])->name('typeProject');
     });
 
 

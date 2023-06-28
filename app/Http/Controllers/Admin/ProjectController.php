@@ -29,6 +29,15 @@ class ProjectController extends Controller
       $projects = Project::orderBy('id',$direction)->paginate(10);
       return view('admin.projects.index', compact('projects', 'direction'));
     }
+
+
+    public function TypeProject(){
+      $typologies = Type::all();
+      return view('admin.projects.typeProject', compact('typologies'));
+    }
+
+
+
     /**
      * Show the form for creating a new resource.
      *
